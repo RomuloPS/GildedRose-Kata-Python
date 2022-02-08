@@ -11,7 +11,7 @@ class GildedRose(object):
             modifier = 1
             
             if item.name.startswith('Conjured'):
-                modifier = 1*modifier
+                modifier = 2*modifier
             else:
                 modifier = 1*modifier
 
