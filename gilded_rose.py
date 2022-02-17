@@ -11,6 +11,17 @@ class GildedRose(object):
         self.items = items
 
 
+    def update_quality(self):
+        for item in self.items:
+            # Se o item é mutável
+            if self.is_mutable(item):
+                self.update_item_quality(item)
+
+
+    def is_mutable(self, item):
+        return item.name != self.SULFURAS
+
+    
     def update_item_quality(self, item):
         if item.name != self.AGED_BRIE and item.name != self.BACKSTAGE_PASS:
             if item.name != self.SULFURAS:
@@ -22,18 +33,18 @@ class GildedRose(object):
                     self.change_quality(item,1)
                 if item.sell_in < 6:
                     self.change_quality(item,1)
-        if item.name != self.SULFURAS:
-            self.change_sell_in(item,-1)
+        self.change_sell_in(item,-1)
         if item.sell_in < 0:
             if item.name != self.AGED_BRIE:
                 if item.name != self.BACKSTAGE_PASS:
-                    if item.name != self.SULFURAS:
-                        self.change_quality(item,-1)
+                    self.change_quality(item,-1)
                 else:
                     item.quality = item.quality - item.quality
             else:
-                self.change_quality(item,1)
-        
+                # Is this wrong? It Looks wrong.
+                # This line was on the original Kata, but I believe it was a bug.
+                # self.change_quality(item,1)
+                pass
         pass
 
 
@@ -46,9 +57,6 @@ class GildedRose(object):
         item.sell_in = item.sell_in + value
 
 
-    def update_quality(self):
-        for item in self.items:
-            self.update_item_quality(item)
 
 
 class Item:
