@@ -62,7 +62,7 @@ class GildedRoseTest(TestCase):
         GildedRose(self.items).update_quality()
         expected = [
             {'sell_in': -1, 'quality': 18},
-            {'sell_in': -1, 'quality': 4},
+            {'sell_in': 0, 'quality': 2},
         ]
 
         for index, expectation in enumerate(expected):
@@ -100,11 +100,10 @@ class GildedRoseTest(TestCase):
         self.assertEqual(item.quality, expected['quality'])
         self.assertEqual(item.sell_in, expected['sell_in'])
 
-    @skip
     def test_conjured_items_decrease_in_quality_twice_as_fast(self):
         self.items.append(Item("Conjured Mana Cake", 3, 6))
         GildedRose(self.items).update_quality()
-        expected = {'sell_in': 2, 'quality': 2}
+        expected = {'sell_in': 2, 'quality': 4}
         item = self.items[0]
         self.assertEqual(item.quality, expected['quality'])
         self.assertEqual(item.sell_in, expected['sell_in'])
