@@ -16,7 +16,7 @@ class GildedRose(object):
             if item.name != self.SULFURAS:
                 self.change_quality(item,-1)
         else:
-            item.quality = item.quality + 1
+            self.change_quality(item,1)
             if item.name == self.BACKSTAGE_PASS:
                 if item.sell_in < 11:
                     self.change_quality(item,1)
@@ -49,7 +49,6 @@ class GildedRose(object):
     def update_quality(self):
         for item in self.items:
             self.update_item_quality(item)
-
 
 
 class Item:
