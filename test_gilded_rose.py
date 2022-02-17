@@ -62,7 +62,7 @@ class GildedRoseTest(TestCase):
         GildedRose(self.items).update_quality()
         expected = [
             {'sell_in': -1, 'quality': 18},
-            {'sell_in': 0, 'quality': 2},
+            {'sell_in': -1, 'quality': 2},
         ]
 
         for index, expectation in enumerate(expected):
