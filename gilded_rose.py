@@ -13,38 +13,33 @@ class GildedRose(object):
 
     def update_item_quality(self, item):
         if item.name != self.AGED_BRIE and item.name != self.BACKSTAGE_PASS:
-            if item.quality > 0:
-                if item.name != self.SULFURAS:
-                    self.change_quality(item,-1)
+            if item.name != self.SULFURAS:
+                self.change_quality(item,-1)
         else:
-            if item.quality < 50:
-                item.quality = item.quality + 1
-                if item.name == self.BACKSTAGE_PASS:
-                    if item.sell_in < 11:
-                        if item.quality < 50:
-                            self.change_quality(item,1)
-                    if item.sell_in < 6:
-                        if item.quality < 50:
-                            self.change_quality(item,1)
+            item.quality = item.quality + 1
+            if item.name == self.BACKSTAGE_PASS:
+                if item.sell_in < 11:
+                    self.change_quality(item,1)
+                if item.sell_in < 6:
+                    self.change_quality(item,1)
         if item.name != self.SULFURAS:
             self.change_sell_in(item,-1)
         if item.sell_in < 0:
             if item.name != self.AGED_BRIE:
                 if item.name != self.BACKSTAGE_PASS:
-                    if item.quality > 0:
-                        if item.name != self.SULFURAS:
-                            self.change_quality(item,-1)
+                    if item.name != self.SULFURAS:
+                        self.change_quality(item,-1)
                 else:
                     item.quality = item.quality - item.quality
             else:
-                if item.quality < 50:
-                    self.change_quality(item,1)
+                self.change_quality(item,1)
         
         pass
 
 
     def change_quality(self, item, value):
-        item.quality = item.quality + value
+        if (item.quality + value) <= 50 and (item.quality + value)>= 0:
+            item.quality = item.quality + value
 
 
     def change_sell_in(self,item,value):
